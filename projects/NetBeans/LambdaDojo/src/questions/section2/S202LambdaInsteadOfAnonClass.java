@@ -32,7 +32,10 @@ public class S202LambdaInsteadOfAnonClass {
         ExecutorService executor = Executors.newFixedThreadPool(1);
 
         // 非同期にファイルを読み込み
-        Future<List<String>> future = executor.submit(callable);
+        Future<List<String>> future = executor.submit(() -> {
+            Path path = Paths.get("src/questions/section2/S202LambdaInsteadOfAnonClass.java");
+            return Files.readAllLines(path);
+        });
         try {
             System.out.println(future.get());
         } catch (InterruptedException | ExecutionException ex) {

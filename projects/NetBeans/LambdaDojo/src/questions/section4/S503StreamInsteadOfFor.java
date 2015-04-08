@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
 public class S503StreamInsteadOfFor {
 
     public S503StreamInsteadOfFor() {
@@ -12,11 +15,15 @@ public class S503StreamInsteadOfFor {
 
     private void processStatistics() {
         // 乱数のリストを作成
-        Random random = new Random();
-        List<Double> numbers = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            numbers.add(random.nextDouble());
-        }
+        final Random random = new Random();
+        // List<Double> numbers = new ArrayList<>();
+        // for (int i = 0; i < 100; i++) {
+        //     numbers.add(random.nextDouble());
+        // }
+        List<Double> numbers = IntStream.range(0, 100)
+                                        .mapToDouble(x -> random.nextDouble())
+                                        .boxed()
+                                        .collect(Collectors.toList());
         
         // 平均を算出
         double ave = 0.0;

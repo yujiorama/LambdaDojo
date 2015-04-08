@@ -32,11 +32,12 @@ public class S503StreamInsteadOfFor {
         List<Double> numbers = random.doubles(100).boxed().collect(Collectors.toList());
 
         // 平均を算出
-        double ave = 0.0;
-        for (Double x : numbers) {
-            ave += x;
-        }
-        ave /= numbers.size();
+        // double ave = 0.0;
+        // for (Double x : numbers) {
+        //     ave += x;
+        // }
+        // ave /= numbers.size();
+        double ave = numbers.stream().collect(Collectors.averagingDouble(x -> x));
 
         // 分散を算出
         double variance = 0.0;

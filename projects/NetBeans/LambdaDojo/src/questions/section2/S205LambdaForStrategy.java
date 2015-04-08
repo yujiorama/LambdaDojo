@@ -28,24 +28,35 @@ public class S205LambdaForStrategy {
     private void useContainer() {
         Container<String> container = new Container<>("Hello, World!");
         
-        container.output(new Consumer<String>() {
-            @Override
-            public void accept(String value) {
-                System.out.println(value);
-            }
+        // container.output(new Consumer<String>() {
+        //     @Override
+        //     public void accept(String value) {
+        //         System.out.println(value);
+        //     }
+        // });
+        container.output((value) -> {
+            System.out.println(value);
         });
         
-        final String filename = "container.txt";
-        container.output(new Consumer<String>() {
-            @Override
-            public void accept(String value) {
-                try {
-                    Path path = Paths.get(filename);
-                    Files.write(path, value.getBytes());
-                } catch (IOException ex) {
-                    // 例外処理
-                    System.err.println("printに失敗しました");
-                }
+        final String filename = "container2.txt";
+        // container.output(new Consumer<String>() {
+        //     @Override
+        //     public void accept(String value) {
+        //         try {
+        //             Path path = Paths.get(filename);
+        //             Files.write(path, value.getBytes());
+        //         } catch (IOException ex) {
+        //             // 例外処理
+        //             System.err.println("printに失敗しました");
+        //         }
+        //     }
+        // });
+        container.output((value) -> {
+            try {
+                Path path = Paths.get(filename);
+                Files.write(path, value.getBytes());
+            } catch (IOException e) {
+                System.err.println("print error");
             }
         });
     }

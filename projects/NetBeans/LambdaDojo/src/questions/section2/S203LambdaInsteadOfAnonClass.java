@@ -33,7 +33,17 @@ public class S203LambdaInsteadOfAnonClass {
         ExecutorService executor = Executors.newFixedThreadPool(1);
 
         // 1分間だけ、タスクを実行する
-        executor.submit(runnable);
+        executor.submit(() -> {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            for (;;) {
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                    System.out.println(LocalTime.now().format(formatter));
+                } catch (InterruptedException e) {
+                    return;
+                }
+            }
+        });
         try {
             TimeUnit.MINUTES.sleep(1);
         } catch (InterruptedException ex) {

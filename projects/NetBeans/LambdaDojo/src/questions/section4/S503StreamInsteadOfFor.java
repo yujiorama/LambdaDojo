@@ -25,11 +25,12 @@ public class S503StreamInsteadOfFor {
         //                                 .mapToDouble(x -> random.nextDouble())
         //                                 .boxed()
         //                                 .collect(Collectors.toList());
-        
-        List<Double> numbers = DoubleStream.generate(() -> random.nextDouble())
-                                           .limit(100)
-                                           .boxed()
-                                           .collect(Collectors.toList());
+        // List<Double> numbers = DoubleStream.generate(() -> random.nextDouble())
+        //                                    .limit(100)
+        //                                    .boxed()
+        //                                    .collect(Collectors.toList());
+        List<Double> numbers = random.doubles(100).boxed().collect(Collectors.toList());
+
         // 平均を算出
         double ave = 0.0;
         for (Double x : numbers) {

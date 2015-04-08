@@ -35,7 +35,9 @@ public class S201LambdaInsteadOfAnonClass {
         System.out.println("Before Sort: " + numbers);
 
         // 整数のリストをソート
-        Collections.sort(numbers, comparator);
+        Collections.sort(numbers, (x, y) -> {
+            return Integer.compare(x, y);
+        });
         System.out.println("After Sort: " + numbers);
     }
 

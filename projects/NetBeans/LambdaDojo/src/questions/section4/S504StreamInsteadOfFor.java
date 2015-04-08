@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class S504StreamInsteadOfFor {
 
     public S504StreamInsteadOfFor() {
@@ -23,14 +26,18 @@ public class S504StreamInsteadOfFor {
                 "Peter Piper picked? "
         );
         
-        Set<String> words = new HashSet<>();
-        for (String sentence: sentences) {
-            String[] splitedSentence  = sentence.split("[\\.,\\? ]");
-            for (String word: splitedSentence) {
-                words.add(word.toLowerCase());
-            }
-        }
-        
+        // Set<String> words = new HashSet<>();
+        // for (String sentence: sentences) {
+        //     String[] splitedSentence  = sentence.split("[\\.,\\? ]");
+        //     for (String word: splitedSentence) {
+        //         words.add(word.toLowerCase());
+        //     }
+        // }
+        Set<String> words = sentences.stream()
+            .flatMap((sentence) -> Stream.of(sentence.split("[\\.,\\? ]")))
+            .map((word) -> word.toLowerCase())
+            .collect(Collectors.toSet());
+
         System.out.println(words);
     }
 

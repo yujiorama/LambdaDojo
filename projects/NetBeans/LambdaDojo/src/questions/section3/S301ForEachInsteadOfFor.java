@@ -12,9 +12,12 @@ public class S301ForEachInsteadOfFor {
         List<String> strings = Arrays.asList("a", "b", "c", "d", "e");
         
         StringBuilder builder = new StringBuilder();
-        for (String s: strings) {
+        // for (String s: strings) {
+        //     builder.append(s);
+        // }
+        strings.forEach((s) -> {
             builder.append(s);
-        }
+        });
         System.out.println(builder.toString());
     }
 

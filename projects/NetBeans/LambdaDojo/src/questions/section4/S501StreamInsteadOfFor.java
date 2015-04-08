@@ -16,11 +16,15 @@ public class S501StreamInsteadOfFor {
         //         System.out.print(x + " ");
         //     }
         // }
-        numbers.forEach((x) -> {
-                if (x % 2 == 0) {
-                    System.out.print(x + " ");
-                }
-        });
+        // numbers.forEach((x) -> {
+        //     if (x % 2 == 0) {
+        //         System.out.print(x + " ");
+        //     }
+        // });
+        numbers.stream()
+            .filter((x) -> x % 2 == 0)
+            .map((x) -> x + " ")
+            .forEach(System.out::print);
         System.out.println();
     }
 

@@ -20,9 +20,13 @@ public class S502StreamInsteadOfFor {
         //     sum += x;
         // }
         // System.out.println(sum);
-        IntSummaryStatistics stats = numbers.stream()
-                                            .collect(Collectors.summarizingInt((x) -> x));
-        System.out.println(stats.getSum());
+        // IntSummaryStatistics stats = numbers.stream()
+        //                                     .collect(Collectors.summarizingInt((x) -> x));
+        // System.out.println(stats.getSum());
+        int sum = numbers.stream()
+                         .mapToInt(x -> x)
+                         .sum();
+        System.out.println(sum);
     }
 
     public static void main(String[] args) {

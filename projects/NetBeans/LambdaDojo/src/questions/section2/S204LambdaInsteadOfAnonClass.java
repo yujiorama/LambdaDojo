@@ -12,13 +12,15 @@ public class S204LambdaInsteadOfAnonClass {
 
     // 2-4 Lambda 式で書きかえてみましょう
     private void rewriteByLambda() {
-        Function<String, Integer> function = new Function<String, Integer>() {
-            @Override
-            public Integer apply(String word) {
-                return word.length();
-            }
+        // Function<String, Integer> function = new Function<String, Integer>() {
+        //     @Override
+        //     public Integer apply(String word) {
+        //         return word.length();
+        //     }
+        // };
+        Function<String, Integer> function = (word) -> {
+            return word.length();
         };
-        
         List<String> words = Arrays.asList("one thing was certain that the white kitten had had nothing to do with it".split(" "));
         double average = 0.0;
         for (String word: words) {

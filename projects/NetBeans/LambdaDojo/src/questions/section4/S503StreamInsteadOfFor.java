@@ -37,13 +37,18 @@ public class S503StreamInsteadOfFor {
         //     ave += x;
         // }
         // ave /= numbers.size();
-        double ave = numbers.stream().collect(Collectors.averagingDouble(x -> x));
+        final double ave = numbers.stream().collect(Collectors.averagingDouble(x -> x));
 
         // 分散を算出
-        double variance = 0.0;
-        for (Double x : numbers) {
-            variance += (x - ave) * (x - ave);
-        }
+        // double variance = 0.0;
+        // for (Double x : numbers) {
+        //     variance += (x - ave) * (x - ave);
+        // }
+        // variance /= numbers.size();
+        double variance = numbers.stream()
+                                 .map((x) -> x - ave)
+                                 .map((x) -> x * x)
+                                 .reduce(0.0, (acc, x) -> acc + x);
         variance /= numbers.size();
         
         System.out.println("Average: " + ave);

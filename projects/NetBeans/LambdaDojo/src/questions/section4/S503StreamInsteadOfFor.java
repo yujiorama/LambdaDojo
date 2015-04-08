@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import java.util.stream.IntStream;
+import java.util.stream.DoubleStream;
 import java.util.stream.Collectors;
 
 public class S503StreamInsteadOfFor {
@@ -20,11 +21,15 @@ public class S503StreamInsteadOfFor {
         // for (int i = 0; i < 100; i++) {
         //     numbers.add(random.nextDouble());
         // }
-        List<Double> numbers = IntStream.range(0, 100)
-                                        .mapToDouble(x -> random.nextDouble())
-                                        .boxed()
-                                        .collect(Collectors.toList());
+        // List<Double> numbers = IntStream.range(0, 100)
+        //                                 .mapToDouble(x -> random.nextDouble())
+        //                                 .boxed()
+        //                                 .collect(Collectors.toList());
         
+        List<Double> numbers = DoubleStream.generate(() -> random.nextDouble())
+                                           .limit(100)
+                                           .boxed()
+                                           .collect(Collectors.toList());
         // 平均を算出
         double ave = 0.0;
         for (Double x : numbers) {

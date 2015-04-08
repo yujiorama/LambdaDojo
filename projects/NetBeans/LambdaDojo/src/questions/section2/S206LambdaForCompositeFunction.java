@@ -64,6 +64,7 @@ public class S206LambdaForCompositeFunction {
             }
         };
 
+        System.out.println(persons);
         Collections.sort(persons, comparator);
         System.out.println(persons);
     }

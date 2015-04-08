@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+
 public class S506StreamInsteadOfFor {
 
     public S506StreamInsteadOfFor() {
@@ -28,16 +31,19 @@ public class S506StreamInsteadOfFor {
                 "Peter Piper picked? "
         );
         
-        Map<String, Integer> result = new HashMap<>();
-        for (String sentence: sentences) {
-            String[] splitedSentence  = sentence.split("[\\.,\\? ]");
-            for (String word: splitedSentence) {
-                String lowerWord = word.toLowerCase();
-                int count = result.getOrDefault(lowerWord, 0);
-                result.put(lowerWord, count+1);
-            }
-        }
-        
+        // Map<String, Integer> result = new HashMap<>();
+        // for (String sentence: sentences) {
+        //     String[] splitedSentence  = sentence.split("[\\.,\\? ]");
+        //     for (String word: splitedSentence) {
+        //         String lowerWord = word.toLowerCase();
+        //         int count = result.getOrDefault(lowerWord, 0);
+        //         result.put(lowerWord, count+1);
+        //     }
+        // }
+        Map<String, Integer> result = sentences.stream()
+                                               .flatMap((sentence) -> Stream.of(sentence.split("[\\.,\\? ]")))
+                                               .map((word) -> word.toLowerCase())
+                                               .collect(Collectors.groupingBy((lowerWord) -> lowerWord, Collectors.summingInt((x) -> 1)));
         System.out.println(result);
     }
 
